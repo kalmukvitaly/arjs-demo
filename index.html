@@ -4,18 +4,18 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<title>Hello, world!</title>
 	<!-- include three.js library -->
-	<script src='/arjs-demo/js/three.js'></script>
-	<script src='/arjs-demo/js/OBJLoader.js'></script>
-	<script src='/arjs-demo/js/MTLLoader.js'></script>
-	<script src='/arjs-demo/js/GLTFLoader.js'></script>
+	<script src='js/three.js'></script>
+	<script src='js/OBJLoader.js'></script>
+	<script src='js/MTLLoader.js'></script>
+	<script src='js/GLTFLoader.js'></script>
 	<!-- include jsartookit -->
-	<script src="/arjs-demo/js/artoolkit.min.js"></script>
-	<script src="/arjs-demo/js/artoolkit.api.js"></script>
+	<script src="js/artoolkit.min.js"></script>
+	<script src="js/artoolkit.api.js"></script>
 	<!-- include threex.artoolkit -->
-	<script src="/arjs-demo/js/threex-artoolkitsource.js"></script>
-	<script src="/arjs-demo/js/threex-artoolkitcontext.js"></script>
-	<script src="/arjs-demo/js/threex-arbasecontrols.js"></script>
-	<script src="/arjs-demo/js/threex-armarkercontrols.js"></script>
+	<script src="js/threex-artoolkitsource.js"></script>
+	<script src="js/threex-artoolkitcontext.js"></script>
+	<script src="js/threex-arbasecontrols.js"></script>
+	<script src="js/threex-armarkercontrols.js"></script>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -96,7 +96,7 @@ function initialize()
 
 	// create atToolkitContext
 	arToolkitContext = new THREEx.ArToolkitContext({
-		cameraParametersUrl: '/arjs-demo/data/camera_para.dat',
+		cameraParametersUrl: 'data/camera_para.dat',
 		detectionMode: 'mono'
 	});
 	
@@ -113,19 +113,19 @@ function initialize()
 	// markerRoot1 = new THREE.Group();
 	// scene.add(markerRoot1);
 	// let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-	// 	type: 'pattern', patternUrl: "/arjs-demo/data/cat.patt",
+	// 	type: 'pattern', patternUrl: "data/cat.patt",
 	// })
 	
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
 	
 	// new THREE.MTLLoader()
-	// 	.setPath( '/arjs-demo/models/fish/' )
+	// 	.setPath( 'models/fish/' )
 	// 	.load( 'fish-2.mtl', function ( materials ) {
 	// 		materials.preload();
 	// 		new THREE.OBJLoader()
 	// 			.setMaterials( materials )
-	// 			.setPath( '/arjs-demo/models/fish/' )
+	// 			.setPath( 'models/fish/' )
 	// 			.load( 'fish-2.obj', function ( group ) {
 	// 				mesh1 = group.children[0];
 	// 				mesh1.material.side = THREE.DoubleSide;
@@ -138,7 +138,7 @@ function initialize()
 	markerRoot2 = new THREE.Group();
 	scene.add(markerRoot2);
 	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
-		type: 'pattern', patternUrl: "/arjs-demo/data/test.patt",
+		type: 'pattern', patternUrl: "data/slice.patt",
 	})
 	
 	// let loaderGlrf = new THREE.GLTFLoader();
@@ -155,12 +155,12 @@ function initialize()
 	// );
 
 	new THREE.MTLLoader()
-		.setPath( '/arjs-demo/models/fish/' )
+		.setPath( 'models/fish/' )
 		.load( 'fish-2.mtl', function ( materials ) {
 			materials.preload();
 			new THREE.OBJLoader()
 				.setMaterials( materials )
-				.setPath( '/arjs-demo/models/fish/' )
+				.setPath( 'models/fish/' )
 				.load( 'fish-2.obj', function ( group ) {
 					mesh2 = group.children[0];
 					mesh2.material.side = THREE.DoubleSide;
@@ -172,13 +172,13 @@ function initialize()
 		});
 	
 	// new THREE.MTLLoader()
-	// 	.setPath( '/arjs-demo/models/holo/' )
+	// 	.setPath( 'models/holo/' )
 	// 	.load( 'holo.mtl', function ( materials ) {
 	// 		console.log(materials);
 	// 		materials.preload();
 	// 		new THREE.OBJLoader()
 	// 			.setMaterials( materials )
-	// 			.setPath( '/arjs-demo/models/holo/' )
+	// 			.setPath( 'models/holo/' )
 	// 			.load( 'holo.obj', function ( group ) {
 	// 				mesh2 = group.children[0];
 	// 				mesh2.material.side = THREE.DoubleSide;
@@ -190,12 +190,12 @@ function initialize()
 	// 	});
 	
 	// new THREE.MTLLoader()
-	// 	.setPath( '/arjs-demo/models/man/' )
+	// 	.setPath( 'models/man/' )
 	// 	.load( 'man.mtl', function ( materials ) {
 	// 		materials.preload();
 	// 		new THREE.OBJLoader()
 	// 			.setMaterials( materials )
-	// 			.setPath( '/arjs-demo/models/man/' )
+	// 			.setPath( 'models/man/' )
 	// 			.load( 'man.obj', function ( group ) {
 	// 				mesh3 = group.children[0];
 	// 				mesh3.material.side = THREE.DoubleSide;
