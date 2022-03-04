@@ -110,30 +110,30 @@ function initialize()
 	////////////////////////////////////////////////////////////
 
 	// build markerControls
-	markerRoot1 = new THREE.Group();
-	scene.add(markerRoot1);
-	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "/arjs-demo/data/cat.patt",
-	})
+	// markerRoot1 = new THREE.Group();
+	// scene.add(markerRoot1);
+	// let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+	// 	type: 'pattern', patternUrl: "/arjs-demo/data/cat.patt",
+	// })
 	
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
 	
-	new THREE.MTLLoader()
-		.setPath( '/arjs-demo/models/fish/' )
-		.load( 'fish-2.mtl', function ( materials ) {
-			materials.preload();
-			new THREE.OBJLoader()
-				.setMaterials( materials )
-				.setPath( '/arjs-demo/models/fish/' )
-				.load( 'fish-2.obj', function ( group ) {
-					mesh1 = group.children[0];
-					mesh1.material.side = THREE.DoubleSide;
-					mesh1.position.y = 0.25;
-					mesh1.scale.set(0.25,0.25,0.25);
-					markerRoot1.add(mesh1);
-				}, onProgress, onError );
-		});
+	// new THREE.MTLLoader()
+	// 	.setPath( '/arjs-demo/models/fish/' )
+	// 	.load( 'fish-2.mtl', function ( materials ) {
+	// 		materials.preload();
+	// 		new THREE.OBJLoader()
+	// 			.setMaterials( materials )
+	// 			.setPath( '/arjs-demo/models/fish/' )
+	// 			.load( 'fish-2.obj', function ( group ) {
+	// 				mesh1 = group.children[0];
+	// 				mesh1.material.side = THREE.DoubleSide;
+	// 				mesh1.position.y = 0.25;
+	// 				mesh1.scale.set(0.25,0.25,0.25);
+	// 				markerRoot1.add(mesh1);
+	// 			}, onProgress, onError );
+	// 	});
 
 	markerRoot2 = new THREE.Group();
 	scene.add(markerRoot2);
@@ -162,11 +162,12 @@ function initialize()
 				.setMaterials( materials )
 				.setPath( '/arjs-demo/models/fish/' )
 				.load( 'fish-2.obj', function ( group ) {
-					mesh1 = group.children[0];
-					mesh1.material.side = THREE.DoubleSide;
-					mesh1.position.y = 0.25;
-					mesh1.scale.set(0.25,0.25,0.25);
-					markerRoot2.add(mesh1);
+					mesh2 = group.children[0];
+					mesh2.material.side = THREE.DoubleSide;
+					mesh2.rotation.z = 4.5;
+					mesh2.position.y = 0.25;
+					mesh2.scale.set(0.25,0.25,0.25);
+					markerRoot2.add(mesh2);
 				}, onProgress, onError );
 		});
 	
@@ -213,11 +214,11 @@ function update()
 	if ( arToolkitSource.ready !== false )
 		arToolkitContext.update( arToolkitSource.domElement );
 
-	if ( markerRoot1.visible )
+	if ( markerRoot1 && markerRoot1.visible && mesh1 )
 		mesh1.rotation.y += 0.01;
 
-	if ( markerRoot2.visible )
-		mesh2.rotation.y += 0.002;
+	if ( markerRoot2 && markerRoot2.visible && mesh2)
+		mesh2.rotation.y += 0.01;
 }
 
 
