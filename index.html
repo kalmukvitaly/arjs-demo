@@ -153,42 +153,58 @@ function initialize()
 	// 	onProgress,
 	// 	onError,
 	// );
-	
+
 	new THREE.MTLLoader()
-		.setPath( '/arjs-demo/models/holo/' )
-		.load( 'holo.mtl', function ( materials ) {
-			console.log(materials);
+		.setPath( '/arjs-demo/models/fish/' )
+		.load( 'fish-2.mtl', function ( materials ) {
 			materials.preload();
 			new THREE.OBJLoader()
 				.setMaterials( materials )
-				.setPath( '/arjs-demo/models/holo/' )
-				.load( 'holo.obj', function ( group ) {
-					mesh2 = group.children[0];
-					mesh2.material.side = THREE.DoubleSide;
-					mesh2.position.y = 0.0;
-					mesh2.rotation.y = 0.5;
-					mesh2.scale.set(0.15,0.15,0.15);
-					markerRoot2.add(mesh2);
+				.setPath( '/arjs-demo/models/fish/' )
+				.load( 'fish-2.obj', function ( group ) {
+					mesh1 = group.children[0];
+					mesh1.material.side = THREE.DoubleSide;
+					mesh1.position.y = 0.25;
+					mesh1.scale.set(0.25,0.25,0.25);
+					markerRoot2.add(mesh1);
 				}, onProgress, onError );
 		});
 	
-	new THREE.MTLLoader()
-		.setPath( '/arjs-demo/models/man/' )
-		.load( 'man.mtl', function ( materials ) {
-			materials.preload();
-			new THREE.OBJLoader()
-				.setMaterials( materials )
-				.setPath( '/arjs-demo/models/man/' )
-				.load( 'man.obj', function ( group ) {
-					mesh3 = group.children[0];
-					mesh3.material.side = THREE.DoubleSide;
-					mesh3.position.y = 0.0;
-					mesh3.position.x = -0.1;
-					mesh3.rotation.y = 0.5;
-					mesh3.scale.set(0.025,0.025,0.025);
-					markerRoot2.add(mesh3);
-				}, onProgress, onError );
-		});
+	// new THREE.MTLLoader()
+	// 	.setPath( '/arjs-demo/models/holo/' )
+	// 	.load( 'holo.mtl', function ( materials ) {
+	// 		console.log(materials);
+	// 		materials.preload();
+	// 		new THREE.OBJLoader()
+	// 			.setMaterials( materials )
+	// 			.setPath( '/arjs-demo/models/holo/' )
+	// 			.load( 'holo.obj', function ( group ) {
+	// 				mesh2 = group.children[0];
+	// 				mesh2.material.side = THREE.DoubleSide;
+	// 				mesh2.position.y = 0.0;
+	// 				mesh2.rotation.y = 0.5;
+	// 				mesh2.scale.set(0.15,0.15,0.15);
+	// 				markerRoot2.add(mesh2);
+	// 			}, onProgress, onError );
+	// 	});
+	
+	// new THREE.MTLLoader()
+	// 	.setPath( '/arjs-demo/models/man/' )
+	// 	.load( 'man.mtl', function ( materials ) {
+	// 		materials.preload();
+	// 		new THREE.OBJLoader()
+	// 			.setMaterials( materials )
+	// 			.setPath( '/arjs-demo/models/man/' )
+	// 			.load( 'man.obj', function ( group ) {
+	// 				mesh3 = group.children[0];
+	// 				mesh3.material.side = THREE.DoubleSide;
+	// 				mesh3.position.y = 0.0;
+	// 				mesh3.position.x = -0.1;
+	// 				mesh3.rotation.y = 0.5;
+	// 				mesh3.scale.set(0.025,0.025,0.025);
+	// 				markerRoot2.add(mesh3);
+	// 			}, onProgress, onError );
+	// 	});
 }
 
 function update()
