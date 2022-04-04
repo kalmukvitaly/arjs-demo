@@ -135,11 +135,57 @@ function initialize()
 	// 			}, onProgress, onError );
 	// 	});
 
-	markerRoot2 = new THREE.Group();
-	scene.add(markerRoot2);
-	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
+	// markerRoot1 = new THREE.Group();
+	// scene.add(markerRoot1);
+	// let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+	// 	type: 'pattern', patternUrl: "data/cat.patt",
+	// })
+
+	markerRoot1 = new THREE.Group();
+	scene.add(markerRoot1);
+	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/cat.patt",
-	})
+	});
+
+	// the inside of the hole
+	// const cubeLoader = new THREE.CubeTextureLoader();
+	// cubeLoader.setPath( 'images/venera/' );
+
+	// const textureCube = cubeLoader.load( [
+	// 	'background.png', 'background.png',
+	// 	'background.png', 'background.png',
+	// 	'background.png', 'background.png'
+	// ] );
+
+	let geometry1	= new THREE.CubeGeometry(2,2,2);
+	let loader = new THREE.TextureLoader();
+	let texture = loader.load( 'images/venera/background.png' );
+	let material1	= new THREE.MeshLambertMaterial({
+		transparent : true,
+		map: texture,
+		side: THREE.BackSide
+	}); 
+	
+	let scale = 0.5;
+	let offset = -1.3;
+	let mesh1 = new THREE.Mesh( geometry1, material1 );
+	mesh1.scale.set(scale, scale, scale);
+	mesh1.position.y = offset;
+	
+	markerRoot1.add( mesh1 );
+	
+	// the invisibility cloak (box with a hole)
+	let geometry0 = new THREE.BoxGeometry(2,2,2);
+	geometry0.faces.splice(4, 2); // make hole by removing top two triangles
+	
+	let material0 = new THREE.MeshBasicMaterial({
+		colorWrite: false
+	});
+	
+	let mesh0 = new THREE.Mesh( geometry0, material0 );
+	mesh0.scale.set(scale, scale, scale).multiplyScalar(1.01);
+	mesh0.position.y = offset;
+	markerRoot1.add(mesh0);	
 	
 	// let loaderGlrf = new THREE.GLTFLoader();
 
@@ -154,22 +200,22 @@ function initialize()
 	// 	onError,
 	// );
 
-	new THREE.MTLLoader()
-		.setPath( 'models/fish/' )
-		.load( 'fish-2.mtl', function ( materials ) {
-			materials.preload();
-			new THREE.OBJLoader()
-				.setMaterials( materials )
-				.setPath( 'models/fish/' )
-				.load( 'fish-2.obj', function ( group ) {
-					mesh2 = group.children[0];
-					mesh2.material.side = THREE.DoubleSide;
-					mesh2.rotation.z = 4.5;
-					mesh2.position.y = 0.25;
-					mesh2.scale.set(0.25,0.25,0.25);
-					markerRoot2.add(mesh2);
-				}, onProgress, onError );
-		});
+	// new THREE.MTLLoader()
+	// 	.setPath( 'models/fish/' )
+	// 	.load( 'fish-2.mtl', function ( materials ) {
+	// 		materials.preload();
+	// 		new THREE.OBJLoader()
+	// 			.setMaterials( materials )
+	// 			.setPath( 'models/fish/' )
+	// 			.load( 'fish-2.obj', function ( group ) {
+	// 				mesh2 = group.children[0];
+	// 				mesh2.material.side = THREE.DoubleSide;
+	// 				mesh2.rotation.z = 4.5;
+	// 				mesh2.position.y = 0.25;
+	// 				mesh2.scale.set(0.25,0.25,0.25);
+	// 				markerRoot2.add(mesh2);
+	// 			}, onProgress, onError );
+	// 	});
 	
 	// new THREE.MTLLoader()
 	// 	.setPath( 'models/holo/' )
@@ -214,11 +260,11 @@ function update()
 	if ( arToolkitSource.ready !== false )
 		arToolkitContext.update( arToolkitSource.domElement );
 
-	if ( markerRoot1 && markerRoot1.visible && mesh1 )
-		mesh1.rotation.y += 0.01;
+	// if ( markerRoot1 && markerRoot1.visible && mesh1 )
+	// 	mesh1.rotation.y += 0.01;
 
-	if ( markerRoot2 && markerRoot2.visible && mesh2)
-		mesh2.rotation.y += 0.01;
+	// if ( markerRoot2 && markerRoot2.visible && mesh2)
+	// 	mesh2.rotation.y += 0.01;
 }
 
 
