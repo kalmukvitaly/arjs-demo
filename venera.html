@@ -96,7 +96,8 @@ function initialize()
 	// create atToolkitContext
 	arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'data/camera_para.dat',
-		detectionMode: 'mono'
+		detectionMode: 'mono_and_matrix',
+        matrixCodeType: '3x3',
 	});
 	
 	// copy projection matrix to camera when initialization complete
@@ -114,7 +115,7 @@ function initialize()
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/venera.patt",
+		type: "barcode", barcodeValue: 5,
 	});
 
     let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
@@ -125,7 +126,7 @@ function initialize()
     let meshes = [];
     let geometries = [];
     let materials = [];
-    let offsets = [-1, -0.85, -0.9, -0.8, -0.9];
+    let offsets = [0, 0.15, 0.1, 0.2, 0.1];
 
     images.forEach((img, i) => {
         geometries[i] = new THREE.PlaneGeometry(2, 2, 4, 4);
