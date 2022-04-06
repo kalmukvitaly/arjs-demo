@@ -72,12 +72,14 @@ function initialize()
 
 	function onResize()
 	{
+        renderer.domElement.width = window.innerWidth * 2;
+        renderer.domElement.height = window.innerHeight * 2;
 		arToolkitSource.onResize()	
 		arToolkitSource.copySizeTo(renderer.domElement)	
 		if ( arToolkitContext.arController !== null )
 		{
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
-		}	
+		}
 	}
 
 	arToolkitSource.init(function onReady(){
@@ -115,24 +117,16 @@ function initialize()
 
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
-	// let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-	// 	type: "barcode", barcodeValue: 5,
-	// });
-
-    let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/venera3.patt",
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+		type: "barcode", barcodeValue: 5,
 	});
-
-    // let markerControls3 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-	// 	type: 'pattern', patternUrl: "data/venera2.patt",
-	// });
 
     let images = ['background.png', 'seashell.png', 'thallo.png', 'venera.png', 'zephyr.png'];
     let meshes = [];
     let geometries = [];
     let materials = [];
     let offsets = [0, 0.15, 0.1, 0.2, 0.1];
-	let scale = 0.5;
+	let scale = 1;
 
     images.forEach((img, i) => {
         geometries[i] = new THREE.PlaneGeometry(2 * scale, 2 * scale, 4, 4);
