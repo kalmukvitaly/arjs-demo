@@ -179,9 +179,9 @@ function initialize()
     let geometries = [];
     let materials = [];
 	let sizes = [4, 2, 2, 2, 2];
-    let offsets = [-0.5, 0.15, 0.1, 0.2, 0.1];
+    let offsets = [0, 0.15, 0.1, 0.2, 0.1];
 
-	// offsets = offsets.map(a => a - 0.25);
+	offsets = offsets.map(a => a - 0.5);
 
     images.forEach((img, i) => {
         geometries[i] = new THREE.PlaneGeometry(sizes[i], sizes[i], 2, 2);
