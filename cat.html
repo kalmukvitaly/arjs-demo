@@ -33,7 +33,20 @@ var arToolkitSource, arToolkitContext;
 
 var markerRoot1, markerRoot2;
 
-var mesh1, mesh2, mesh3;
+let models = [
+	{
+		name: 'cat',
+		scale: 0.25,
+	},
+	{
+		name: 'pillow',
+		scale: 0.25,
+	},
+	{
+		name: 'asteroid',
+		scale: 0.25,
+	},
+];
 
 initialize();
 animate();
@@ -53,7 +66,7 @@ function initialize()
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( 640, 480 );
+	renderer.setSize( window.innerWidth * 2, window.innerHeight * 2 );
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -108,14 +121,6 @@ function initialize()
 	////////////////////////////////////////////////////////////
 	// setup markerRoots
 	////////////////////////////////////////////////////////////
-
-	// build markerControls
-	// markerRoot1 = new THREE.Group();
-	// scene.add(markerRoot1);
-	// let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-	// 	type: 'pattern', patternUrl: "data/cat.patt",
-	// })
-	
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
 
@@ -124,39 +129,24 @@ function initialize()
 	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/cat.patt",
 	});
-	
-	// new THREE.MTLLoader()
-	// 	.setPath( 'models/fish/' )
-	// 	.load( 'fish-2.mtl', function ( materials ) {
-	// 		materials.preload();
-	// 		new THREE.OBJLoader()
-	// 			.setMaterials( materials )
-	// 			.setPath( 'models/fish/' )
-	// 			.load( 'fish-2.obj', function ( group ) {
-	// 				mesh1 = group.children[0];
-	// 				mesh1.material.side = THREE.DoubleSide;
-	// 				mesh1.position.y = 0.25;
-	// 				mesh1.scale.set(0.25,0.25,0.25);
-	// 				markerRoot1.add(mesh1);
-	// 			}, onProgress, onError );
-	// 	});
 
-
-	let GLTFLoader = new THREE.GLTFLoader();
-
-	GLTFLoader.load(
-		'models/cube/cube.glb',
-		( gltf ) => {
-			// called when the resource is loaded
-			console.log(123, gltf);
-            // gltf.scene.rotation.z = 4.5;
-            // gltf.scene.position.y = 0.25;
-            // gltf.scene.scale.set(2.25,2.25,2.25);
-			markerRoot1.add(gltf.scene);
-		},
-		onProgress,
-		onError,
-	);
+	models.forEach((model, i) => {
+		new THREE.MTLLoader()
+			.setPath( `models/${model.name}/` )
+			.load( `${model.name}.mtl?3`, function ( materials ) {
+				materials.preload();
+				new THREE.OBJLoader()
+					.setMaterials( materials )
+					.setPath( `models/${model.name}/` )
+					.load( `${model.name}.obj?3`, function ( group ) {
+						models[i].mesh = group.children[0];
+						models[i].mesh.material.side = THREE.DoubleSide;
+						models[i].mesh.position.y = 0.25;
+						models[i].mesh.scale.set(model.scale, model.scale, model.scale);
+						markerRoot1.add(models[i].mesh);
+					}, onProgress, onError );
+			});
+	})
 }
 
 function update()
@@ -165,11 +155,8 @@ function update()
 	if ( arToolkitSource.ready !== false )
 		arToolkitContext.update( arToolkitSource.domElement );
 
-	// if ( markerRoot1 && markerRoot1.visible && mesh1 )
-	// 	mesh1.rotation.y += 0.01;
-
-	// if ( markerRoot2 && markerRoot2.visible && mesh2)
-	// 	mesh2.rotation.y += 0.01;
+	if ( markerRoot1 && markerRoot1.visible && models[2].mesh )
+		models[2].mesh.rotation.y += 0.005;
 }
 
 
