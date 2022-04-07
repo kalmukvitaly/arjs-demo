@@ -118,6 +118,12 @@ function initialize()
 	
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
+
+	markerRoot1 = new THREE.Group();
+	scene.add(markerRoot1);
+	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+		type: 'pattern', patternUrl: "data/cat.patt",
+	});
 	
 	// new THREE.MTLLoader()
 	// 	.setPath( 'models/fish/' )
@@ -135,18 +141,11 @@ function initialize()
 	// 			}, onProgress, onError );
 	// 	});
 
-	
-
-	markerRoot1 = new THREE.Group();
-	scene.add(markerRoot1);
-	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/cat.patt",
-	});
 
 	let loaderGlrf = new THREE.GLTFLoader();
 
 	loaderGlrf.load(
-		'/models/cat2/cat.gltf',
+		'/models/fish2/fish.glb',
 		( gltf ) => {
 			// called when the resource is loaded
 			console.log(123, gltf);
