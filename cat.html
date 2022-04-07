@@ -142,10 +142,10 @@ function initialize()
 	// 	});
 
 
-	let loaderGlrf = new THREE.GLTFLoader();
+	let GLTFLoader = new THREE.GLTFLoader();
 
-	loaderGlrf.load(
-		'/models/fish2/fish2.glb',
+	GLTFLoader.load(
+		'/models/cube/cube.glb',
 		( gltf ) => {
 			// called when the resource is loaded
 			console.log(123, gltf);
