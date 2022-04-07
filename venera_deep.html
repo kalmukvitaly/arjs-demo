@@ -122,6 +122,7 @@ function initialize()
     let meshes = [];
     let geometries = [];
     let materials = [];
+	let offset = -0.25;
 	let sizes = [4, 2, 2, 2, 2];
     let offsets = [0, 0.15, 0.1, 0.2, 0.1];
 
@@ -162,12 +163,6 @@ function initialize()
 	let geometry3 = new THREE.PlaneGeometry(7,7,7,7);
 	geometry3.faces.splice(48, 2); // make hole by removing top two triangles
 
-	
-	let mat123 = new THREE.MeshLambertMaterial({
-		transparent : true,
-		map: texture,
-	}); 
-	
 	let mesh2 = new THREE.Mesh( geometry3, material0 );
 	mesh2.rotation.x = -Math.PI/2;
 	mesh2.position.y = 0;
