@@ -135,6 +135,10 @@ function initialize()
 		type: 'pattern', patternUrl: "data/eye.patt",
 	});
 
+	let markerControls3 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+		type: 'pattern', patternUrl: "data/cat2.patt",
+	});
+
 	models.forEach((model, i) => {
 		new THREE.MTLLoader()
 			.setPath( `models/${model.name}/` )
