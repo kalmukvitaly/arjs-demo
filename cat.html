@@ -145,13 +145,13 @@ function initialize()
 	let loaderGlrf = new THREE.GLTFLoader();
 
 	loaderGlrf.load(
-		'/models/fish2/fish.glb',
+		'/models/fish2/fish2.glb',
 		( gltf ) => {
 			// called when the resource is loaded
 			console.log(123, gltf);
-            gltf.scene.rotation.z = 4.5;
-            gltf.scene.position.y = 0.25;
-            gltf.scene.scale.set(2.25,2.25,2.25);
+            // gltf.scene.rotation.z = 4.5;
+            // gltf.scene.position.y = 0.25;
+            // gltf.scene.scale.set(2.25,2.25,2.25);
 			markerRoot1.add(gltf.scene);
 		},
 		onProgress,
