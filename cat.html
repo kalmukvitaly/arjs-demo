@@ -154,6 +154,10 @@ function initialize()
 	scene.add(markerRoot1);
 
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+		type: 'pattern', patternUrl: "data/cat.patt",
+	});
+
+	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/eye2.patt",
 	});
 
