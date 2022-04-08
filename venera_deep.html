@@ -163,7 +163,7 @@ function initialize()
 
     images.forEach((img, i) => {
         geometries[i] = new THREE.PlaneGeometry(sizes[i], sizes[i], 2, 2);
-        loader.load( 'images/venera/' + img + '?2', (texture) => {
+        loader.load( 'images/venera/' + img + '?3', (texture) => {
 			materials[i] = new THREE.MeshLambertMaterial({
 				transparent : true,
 				map: texture,

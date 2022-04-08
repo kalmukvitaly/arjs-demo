@@ -139,7 +139,6 @@ function initialize()
 	arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'data/camera_para.dat',
 		detectionMode: 'mono',
-		labelingMode: 'white_region',
 	});
 	
 	// copy projection matrix to camera when initialization complete
@@ -161,7 +160,7 @@ function initialize()
 	});
 
 	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/eye2.patt",
+		type: 'pattern', patternUrl: "data/eye.patt",
 	});
 
 	images.forEach((url, i) => {
@@ -170,7 +169,7 @@ function initialize()
 			loaded.push(i);
 			checkLoad();
 		};
-		img.src = `models/${url}`;
+		img.src = `models/${url}?4`;
 	});
 
 	models.forEach((model, i) => {
