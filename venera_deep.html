@@ -98,11 +98,11 @@ function initialize()
 
 	function onResize()
 	{
-		arToolkitSource.onResize()	
-		arToolkitSource.copySizeTo(renderer.domElement)	
+		arToolkitSource.onResizeElement()	
+		arToolkitSource.copyElementSizeTo(renderer.domElement)	
 		if ( arToolkitContext.arController !== null )
 		{
-			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
+			arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)	
 		}	
 	}
 
@@ -149,11 +149,11 @@ function initialize()
 		type: 'pattern', patternUrl: "data/cat.patt",
 	});
 
-	let images = ['background.jpeg', 'seashell.png', 'thallo.png', 'venera.png', 'zephyr.png'];
+	let images = ['background_big.jpg', 'seashell.png', 'thallo.png', 'venera.png', 'zephyr.png'];
     let meshes = [];
     let geometries = [];
     let materials = [];
-	let sizes = [4, 2, 2, 2, 2];
+	let sizes = [3, 2, 2, 2, 2];
     let offsets = [0, 0.15, 0.1, 0.2, 0.1];
 
 	offsets = offsets.map(a => a - 0.5);
