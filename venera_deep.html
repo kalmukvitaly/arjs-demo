@@ -113,9 +113,15 @@ function initialize()
 	function onError(xhr) { console.log( 'An error happened' ); }
 
 	markerRoot1 = new THREE.Group();
+	
 	scene.add(markerRoot1);
-	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+	
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/venera.patt",
+	});
+
+	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+		type: 'pattern', patternUrl: "data/cat.patt",
 	});
 
 	let images = ['background.jpeg', 'seashell.png', 'thallo.png', 'venera.png', 'zephyr.png'];
@@ -131,7 +137,7 @@ function initialize()
     images.forEach((img, i) => {
         geometries[i] = new THREE.PlaneGeometry(sizes[i], sizes[i], 2, 2);
         let loader = new THREE.TextureLoader();
-        let texture = loader.load( 'images/venera/' + img );
+        let texture = loader.load( 'images/venera/' + img + '?2' );
         materials[i] = new THREE.MeshLambertMaterial({
             transparent : true,
             map: texture,
@@ -146,19 +152,10 @@ function initialize()
         markerRoot1.add( meshes[i] );
     });
 	
-	// the invisibility cloak (box with a hole)
-	let geometry0 = new THREE.BoxGeometry(1,0.5,1);
-	geometry0.faces.splice(4, 2); // make hole by removing top two triangles
-	
+	// the invisibility cloak
 	let material0 = new THREE.MeshBasicMaterial({
 		colorWrite: false
 	});
-	
-	let mesh0 = new THREE.Mesh( geometry0, material0 );
-	mesh0.scale.set(1, 1, 1).multiplyScalar(1.01);
-	mesh0.position.y = offset;
-	markerRoot1.add(mesh0);
-
 
 	let geometry3 = new THREE.PlaneGeometry(7,7,7,7);
 	geometry3.faces.splice(48, 2); // make hole by removing top two triangles
