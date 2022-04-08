@@ -2,28 +2,53 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Hello, world!</title>
-	<!-- include three.js library -->
-	<script src='js/three.js'></script>
-	<script src='js/OBJLoader.js'></script>
-	<script src='js/MTLLoader.js'></script>
-	<script src='js/GLTFLoader.js'></script>
-	<!-- include jsartookit -->
-	<script src="js/artoolkit.min.js"></script>
-	<script src="js/artoolkit.api.js"></script>
-	<!-- include threex.artoolkit -->
-	<script src="js/threex-artoolkitsource.js"></script>
-	<script src="js/threex-artoolkitcontext.js"></script>
-	<script src="js/threex-arbasecontrols.js"></script>
-	<script src="js/threex-armarkercontrols.js"></script>
+	<title>Кот</title>
+
+	<style>
+		body {
+			background-color: #000;
+		}
+		.loader {
+			position: fixed;
+			z-index: 9999;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: Roboto, Tahoma;
+			font-size: 30px;
+			line-height: 1.3;
+			color: #fff;
+		}
+		body.loaded .loader {
+			display: none;
+		}
+	</style>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
-<!-- 
-  Example created by Lee Stemkoski: https://github.com/stemkoski
-  Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
--->
+	<div class="loader">
+		Загрузка...
+	</div>
+
+<!-- include three.js library -->
+<script src='js/three.js'></script>
+<script src='js/OBJLoader.js'></script>
+<script src='js/MTLLoader.js'></script>
+<script src='js/GLTFLoader.js'></script>
+<!-- include jsartookit -->
+<script src="js/artoolkit.min.js"></script>
+<script src="js/artoolkit.api.js"></script>
+<!-- include threex.artoolkit -->
+<script src="js/threex-artoolkitsource.js"></script>
+<script src="js/threex-artoolkitcontext.js"></script>
+<script src="js/threex-arbasecontrols.js"></script>
+<script src="js/threex-armarkercontrols.js"></script>
 
 <script>
 
@@ -135,6 +160,8 @@ function initialize()
 		type: 'pattern', patternUrl: "data/eye.patt",
 	});
 
+	let loaded = [];
+
 	models.forEach((model, i) => {
 		new THREE.MTLLoader()
 			.setPath( `models/${model.name}/` )
@@ -149,6 +176,13 @@ function initialize()
 						models[i].mesh.position.y = 0.25;
 						models[i].mesh.scale.set(model.scale, model.scale, model.scale);
 						markerRoot1.add(models[i].mesh);
+						loaded.push(i);
+
+						if (loaded.length === models.length) {
+							document.body.classList.add('loaded');
+						} else {
+							document.querySelector('.loader').innerText = `Загрузка ${loaded.length}/${models.length}`;
+						}
 					}, onProgress, onError );
 			});
 	})

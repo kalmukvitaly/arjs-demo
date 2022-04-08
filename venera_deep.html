@@ -2,28 +2,53 @@
 <!DOCTYPE html>
 <head>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<title>Hello, world!</title>
-	<!-- include three.js library -->
-	<script src='js/three.js'></script>
-	<script src='js/OBJLoader.js'></script>
-	<script src='js/MTLLoader.js'></script>
-	<script src='js/GLTFLoader.js'></script>
-	<!-- include jsartookit -->
-	<script src="js/artoolkit.min.js"></script>
-	<script src="js/artoolkit.api.js"></script>
-	<!-- include threex.artoolkit -->
-	<script src="js/threex-artoolkitsource.js"></script>
-	<script src="js/threex-artoolkitcontext.js"></script>
-	<script src="js/threex-arbasecontrols.js"></script>
-	<script src="js/threex-armarkercontrols.js"></script>
+	<title>Венера</title>
+
+	<style>
+		body {
+			background-color: #000;
+		}
+		.loader {
+			position: fixed;
+			z-index: 9999;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #000;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: Roboto, Tahoma;
+			font-size: 30px;
+			line-height: 1.3;
+			color: #fff;
+		}
+		body.loaded .loader {
+			display: none;
+		}
+	</style>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
-<!-- 
-  Example created by Lee Stemkoski: https://github.com/stemkoski
-  Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
--->
+	<div class="loader">
+		Загрузка...
+	</div>
+
+<!-- include three.js library -->
+<script src='js/three.js'></script>
+<script src='js/OBJLoader.js'></script>
+<script src='js/MTLLoader.js'></script>
+<script src='js/GLTFLoader.js'></script>
+<!-- include jsartookit -->
+<script src="js/artoolkit.min.js"></script>
+<script src="js/artoolkit.api.js"></script>
+<!-- include threex.artoolkit -->
+<script src="js/threex-artoolkitsource.js"></script>
+<script src="js/threex-artoolkitcontext.js"></script>
+<script src="js/threex-arbasecontrols.js"></script>
+<script src="js/threex-armarkercontrols.js"></script>
 
 <script>
 
@@ -128,28 +153,37 @@ function initialize()
     let meshes = [];
     let geometries = [];
     let materials = [];
-	let offset = -0.25;
 	let sizes = [4, 2, 2, 2, 2];
     let offsets = [0, 0.15, 0.1, 0.2, 0.1];
 
 	offsets = offsets.map(a => a - 0.5);
 
+	let loader = new THREE.TextureLoader();
+	let loaded = [];
+
     images.forEach((img, i) => {
         geometries[i] = new THREE.PlaneGeometry(sizes[i], sizes[i], 2, 2);
-        let loader = new THREE.TextureLoader();
-        let texture = loader.load( 'images/venera/' + img + '?2' );
-        materials[i] = new THREE.MeshLambertMaterial({
-            transparent : true,
-            map: texture,
-			// side: THREE.BackSide
-        }); 
+        loader.load( 'images/venera/' + img + '?2', (texture) => {
+			materials[i] = new THREE.MeshLambertMaterial({
+				transparent : true,
+				map: texture,
+				// side: THREE.BackSide
+			}); 
 
-        meshes[i] = new THREE.Mesh( geometries[i], materials[i] );
-        meshes[i].scale.set(1, 1, 1);
-        meshes[i].rotation.x = -Math.PI/2;
-        meshes[i].position.y = offsets[i];
-        
-        markerRoot1.add( meshes[i] );
+			meshes[i] = new THREE.Mesh( geometries[i], materials[i] );
+			meshes[i].scale.set(1, 1, 1);
+			meshes[i].rotation.x = -Math.PI/2;
+			meshes[i].position.y = offsets[i];
+			
+			markerRoot1.add( meshes[i] );
+			loaded.push(i);
+
+			if (loaded.length === images.length) {
+				document.body.classList.add('loaded');
+			} else {
+				document.querySelector('.loader').innerText = `Загрузка ${loaded.length}/${images.length}`;
+			}
+		} );
     });
 	
 	// the invisibility cloak
