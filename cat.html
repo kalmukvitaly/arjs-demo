@@ -163,6 +163,14 @@ function initialize()
 		type: 'pattern', patternUrl: "data/eye.patt",
 	});
 
+	let markers = ['new1.patt', 'new2.patt', 'new3.patt', 'new4.patt', 'new5.patt', 'new6.patt', ];
+
+	markers.forEach(marker => {
+		new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+			type: 'pattern', patternUrl: `data/${marker}`,
+		});
+	});
+
 	images.forEach((url, i) => {
 		let img = document.createElement('img');
 		img.onload = () => {
