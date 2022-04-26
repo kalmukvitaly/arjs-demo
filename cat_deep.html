@@ -27,46 +27,6 @@
 		body.loaded .loader {
 			display: none;
 		}
-		.frames {
-			position: fixed;
-			z-index: 9999;
-			width: 30vw;
-			height: 30vw;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-		}
-
-		.frames .corner {
-			position: absolute;
-			width: 5vw;
-			height: 5vw;
-		}
-
-		.frames .corner:nth-child(1) {
-			top: 0;
-			left: 0;
-			border-top: 2px solid white;
-			border-left: 2px solid white;
-		}
-		.frames .corner:nth-child(2) {
-			top: 0;
-			right: 0;
-			border-top: 2px solid white;
-			border-right: 2px solid white;
-		}
-		.frames .corner:nth-child(3) {
-			bottom: 0;
-			left: 0;
-			border-bottom: 2px solid white;
-			border-left: 2px solid white;
-		}
-		.frames .corner:nth-child(4) {
-			bottom: 0;
-			right: 0;
-			border-bottom: 2px solid white;
-			border-right: 2px solid white;
-		}
 	</style>
 </head>
 
@@ -74,13 +34,6 @@
 
 	<div class="loader">
 		Загрузка...
-	</div>
-
-	<div class="frames">
-		<div class="corner"></div>
-		<div class="corner"></div>
-		<div class="corner"></div>
-		<div class="corner"></div>
 	</div>
 
 <!-- include three.js library -->
@@ -107,27 +60,21 @@ var markerRoot1, markerRoot2;
 
 let models = [
 	{
-		name: 'cat2',
-		scale: 0.25,
-		rotate: 0.001,
-	},
-	{
-		name: 'eye',
-		scale: 0.25,
-		rotate: 0.001,
-	},
-	{
-		name: 'asteroid',
+		name: 'cat',
 		scale: 0.25,
 	},
 	{
 		name: 'pillow',
 		scale: 0.25,
 	},
+	{
+		name: 'asteroid',
+		scale: 0.25,
+	},
 ];
 
 let loaded = [];
-let images = ['eye/aiStandardSurface2_Base_Color_2.png', 'cat2/aiStandardSurface1_Base_Color.png', 'asteroid/aiStandardSurface2_Base_Color_2.png', 'asteroid/Mat1_Base_Color1.png', 'asteroid/Mat1_Roughness.png', 'pillow/Base_texture1.png'];
+let images = ['cat/aiStandardSurface1_Base_Color.png', 'asteroid/aiStandardSurface2_Base_Color_2.png', 'asteroid/Mat1_Base_Color1.png', 'asteroid/Mat1_Roughness.png', 'pillow/Base_texture1.png'];
 
 initialize();
 animate();
@@ -245,9 +192,6 @@ function initialize()
 						models[i].mesh = group.children[0];
 						models[i].mesh.material.side = THREE.DoubleSide;
 						models[i].mesh.position.y = 0.25;
-						if (model.rotate) {
-							models[i].mesh.rotation.y = model.rotate;
-						}
 						models[i].mesh.scale.set(model.scale, model.scale, model.scale);
 						markerRoot1.add(models[i].mesh);
 
