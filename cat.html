@@ -217,10 +217,18 @@ function initialize()
 
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/cat.patt",
+		smooth: true,
+		smoothCount: 10,
+		smoothTolerance: 0.01,
+		smoothThreshold: 5,
 	});
 
 	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/eye.patt",
+		smooth: true,
+		smoothCount: 10,
+		smoothTolerance: 0.01,
+		smoothThreshold: 5,
 	});
 
 	let markers = ['new1.patt', 'new2.patt', 'new3.patt', 'new4.patt', 'new5.patt', 'new6.patt', ];
@@ -228,6 +236,10 @@ function initialize()
 	markers.forEach(marker => {
 		new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 			type: 'pattern', patternUrl: `data/${marker}`,
+			smooth: true,
+			smoothCount: 10,
+			smoothTolerance: 0.01,
+			smoothThreshold: 5,
 		});
 	});
 
