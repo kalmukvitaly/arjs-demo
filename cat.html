@@ -215,23 +215,7 @@ function initialize()
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
 
-	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/cat.patt",
-		smooth: true,
-		smoothCount: 10,
-		smoothTolerance: 0.01,
-		smoothThreshold: 5,
-	});
-
-	let markerControls2 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-		type: 'pattern', patternUrl: "data/eye.patt",
-		smooth: true,
-		smoothCount: 10,
-		smoothTolerance: 0.01,
-		smoothThreshold: 5,
-	});
-
-	let markers = ['new1.patt', 'new2.patt', 'new3.patt', 'new4.patt', 'new5.patt', 'new6.patt', 'extra-cat.patt', 'slava.patt'];
+	let markers = ['simple-cat.patt', 'simple-cat-thin.patt'];
 
 	markers.forEach(marker => {
 		new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
